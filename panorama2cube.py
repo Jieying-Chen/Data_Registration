@@ -108,19 +108,6 @@ def save(result_folder, result, im_name, flag):
         im = Image.fromarray(result[i])
         im.save(img_filename)
 
-
-
-    # if flag == 'all':
-    #     for i in range(6):
-    #         img_filename = directory + '/' + im_name[:-4]+ '_' + orientation[i] + '.jpg'
-    #         im = Image.fromarray(result[i])
-    #         im.save(img_filename)
-    # elif flag == 'side':
-    #     for i in range(4):
-    #         img_filename = directory + '/' + im_name[:-4]+ '_' + orientation[i] + '.jpg'
-    #         im = Image.fromarray(result[i])
-    #         im.save(img_filename)
-
     return
 
 
