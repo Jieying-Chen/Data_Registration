@@ -1,6 +1,5 @@
 import os
 import numpy as np
-from matplotlib import pyplot as plt
 
 from equilib import equi2cube
 from PIL import Image
@@ -69,7 +68,7 @@ def pano2cube(img):
 
     img = preprocess(img) #shape = (3, row, column) = (3, 4000, 8000)
 
-    cube_xt = equi2cube(
+    cube = equi2cube(
             equi = img[None],
             rots = [{"roll": 0, "pitch": 0, "yaw": 0}],
             w_face = 2048,
@@ -79,7 +78,7 @@ def pano2cube(img):
             #mode="nearest",
         )
 
-    result = rearrange_list(cube_xt) #shape = (6, w_face, w_face, 3)
+    result = rearrange_list(cube) #shape = (6, w_face, w_face, 3)
 
     return result
 
@@ -100,9 +99,10 @@ def save(result_folder, result, im_name, flag):
     if not os.path.exists(directory):
         os.makedirs(directory)
     
-    orientation = ['back','left','front','right','top','bottom']
+    orientation = ['back','left','front','right','top','down']
     for i in range(6):
         if i >= 4 and flag == 'side':
+            print("Warning! You will not be able to reconstruct the panoramic image with only side images. You may want to change the flag to 'all'.")
             break
         img_filename = directory + '/' + im_name[:-4]+ '_' + orientation[i] + '.jpg'
         im = Image.fromarray(result[i])
