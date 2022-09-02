@@ -93,6 +93,8 @@ def save(equi, pano_folder, filename):
     im = Image.fromarray(equi)
     img_filename = pano_folder + '/' + filename + '_reconstructed' + '.jpg'
     im.save(img_filename)
+
+    return
     
 
 if __name__ == '__main__':
@@ -105,6 +107,6 @@ if __name__ == '__main__':
         filename = os.fsdecode(file)
         
         rec_equi = cube2pano(cube_folder, filename)
-
+        
         save(rec_equi, pano_folder, filename)
     
